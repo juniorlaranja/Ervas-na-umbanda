@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Axé Banhos - Umbanda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --oxala: #F4E4C1;
+            --oxala-dark: #D4A574;
+            --xango: #8B0000;
+            --xango-light: #CD5C5C;
+            --nana: #4B0082;
+            --nana-light: #9370DB;
+            --iemanja: #4682B4;
+            --iemanja-light: #87CEEB;
+            --oxum: #FFD700;
+            --oxum-light: #FFF8DC;
+            --ogum: #2F4F4F;
+            --ogum-light: #5F9EA0;
+            --oxossi: #228B22;
+            --oxossi-light: #90EE90;
+            --iansa: #FF4500;
+            --iansa-light: #FFA500;
+            --exu: #8B4513;
+            --exu-light: #D2691E;
+            --dark-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes smoke {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-100px) scale(2); opacity: 0; }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+        }
+
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0c29 100%);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* Tela Inicial */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0c29 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .sacred-symbol {
+            width: 150px;
+            height: 150px;
+            border: 3px solid #D4A574;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: pulse 3s infinite;
+            box-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+        }
+
+        .sacred-symbol::before {
+            content: '7';
+            font-family: 'Cinzel', serif;
+            font-size: 80px;
+            color: #D4A574;
+            font-weight: 700;
+        }
+
+        .smoke-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(212, 165, 116, 0.3);
+            border-radius: 50%;
+            animation: smoke 3s infinite;
+        }
+
+        .app-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-top: 30px;
+            background: linear-gradient(45deg, #D4A574, #F4E4C1, #D4A574);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .app-subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .number-7-meaning {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(212, 165, 116, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            max-width: 300px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #D4A574;
+            line-height: 1.5;
+        }
+
+        .enter-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid #D4A574;
+            color: #D4A574;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .enter-btn:hover {
+            background: #D4A574;
+            color: #1a1a2e;
+            box-shadow: 0 0 20px rgba(212, 165, 116, 0.5);
+        }
+
+        .enter-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Header */
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .header.visible {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #D4A574;
+            letter-spacing: 2px;
+        }
+
+        .moon-phase {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Menu Principal */
+        .main-menu {
+            padding: 20px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .main-menu.visible {
+            display: block;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card.oxala { border-color: var(--oxala-dark); }
+        .menu-card.xango { border-color: var(--xango); }
+        .menu-card.nana { border-color: var(--nana-light); }
+        .menu-card.iemanja { border-color: var(--iemanja); }
+        .menu-card.oxum { border-color: var(--oxum); }
+        .menu-card.ogum { border-color: var(--ogum-light); }
+        .menu-card.oxossi { border-color: var(--oxossi); }
+        .menu-card.iansa { border-color: var(--iansa); }
+        .menu-card.exu { border-color: var(--exu); }
+
+        .orixa-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .orixa-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .orixa-color.oxala { color: var(--oxala); }
+        .orixa-color.xango { color: var(--xango-light); }
+        .orixa-color.nana { color: var(--nana-light); }
+        .orixa-color.iemanja { color: var(--iemanja-light); }
+        .orixa-color.oxum { color: var(--oxum); }
+        .orixa-color.ogum { color: var(--ogum-light); }
+        .orixa-color.oxossi { color: var(--oxossi-light); }
+        .orixa-color.iansa { color: var(--iansa); }
+        .orixa-color.exu { color: var(--exu-light); }
+
+        /* Seção de Orixá */
+        .orixa-section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+            min-height: 100vh;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #D4A574;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .orixa-header {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .orixa-header.oxala { background: linear-gradient(135deg, rgba(244,228,193,0.2) 0%, rgba(212,165,116,0.1) 100%); }
+        .orixa-header.xango { background: linear-gradient(135deg, rgba(139,0,0,0.3) 0%, rgba(205,92,92,0.1) 100%); }
+        .orixa-header.nana { background: linear-gradient(135deg, rgba(75,0,130,0.3) 0%, rgba(147,112,219,0.1) 100%); }
+        .orixa-header.iemanja { background: linear-gradient(135deg, rgba(70,130,180,0.3) 0%, rgba(135,206,235,0.1) 100%); }
+        .orixa-header.oxum { background: linear-gradient(135deg, rgba(255,215,0,0.2) 0%, rgba(255,248,220,0.1) 100%); }
+        .orixa-header.ogum { background: linear-gradient(135deg, rgba(47,79,79,0.4) 0%, rgba(95,158,160,0.1) 100%); }
+        .orixa-header.oxossi { background: linear-gradient(135deg, rgba(34,139,34,0.3) 0%, rgba(144,238,144,0.1) 100%); }
+        .orixa-header.iansa { background: linear-gradient(135deg, rgba(255,69,0,0.3) 0%, rgba(255,165,0,0.1) 100%); }
+        .orixa-header.exu { background: linear-gradient(135deg, rgba(139,69,19,0.4) 0%, rgba(210,105,30,0.1) 100%); }
+
+        .orixa-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .orixa-symbology {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .number-7-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #D4A574;
+            color: #1a1a2e;
+            border-radius: 50%;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            margin-left: 10px;
+            animation: glow 2s infinite;
+        }
+
+        /* GUIA DE ERVAS */
+        .ervas-section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+            min-height: 100vh;
+        }
+
+        .ervas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .ervas-title-main {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #D4A574;
+            margin-bottom: 10px;
+        }
+
+        /* LINK EXTERNO SIMPLIFICADO */
+        .external-link-box {
+            display: block;
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(70,130,180,0.1) 100%);
+            border: 2px solid #D4A574;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            text-decoration: none;
+            color: #F4E4C1;
+            transition: all 0.3s;
+        }
+
+        .external-link-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(212, 165, 116, 0.3);
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.3) 0%, rgba(70,130,180,0.2) 100%);
+        }
+
+        .external-link-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .external-link-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .external-link-desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.4;
+            display: block;
+        }
+
+        .search-container {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(180deg, #1a1a2e 0%, transparent 100%);
+            padding: 20px 0;
+            z-index: 50;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(212, 165, 116, 0.3);
+            border-radius: 30px;
+            background: rgba(0,0,0,0.3);
+            color: #F4E4C1;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: #D4A574;
+            box-shadow: 0 0 15px rgba(212, 165, 116, 0.2);
+        }
+
+        .search-box::placeholder {
+            color: #666;
+        }
+
+        .ervas-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .erva-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .erva-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(212, 165, 116, 0.3);
+        }
+
+        .erva-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .erva-nome {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: #F4E4C1;
+        }
+
+        .erva-temp-badge {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .erva-temp-badge.fria { background: rgba(65,105,225,0.2); color: #6495ED; }
+        .erva-temp-badge.morna { background: rgba(50,205,50,0.2); color: #90EE90; }
+        .erva-temp-badge.quente { background: rgba(220,20,60,0.2); color: #FF6B6B; }
+
+        .erva-funcao {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .erva-orixas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .erva-orixa-tag {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            border: 1px solid;
+        }
+
+        /* Sistema de Temperaturas */
+        .temp-legend {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+        }
+
+        .temp-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .temp-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid;
+        }
+
+        .temp-fria { background: #4169E1; border-color: #6495ED; box-shadow: 0 0 10px rgba(65,105,225,0.5); }
+        .temp-morna { background: #32CD32; border-color: #90EE90; box-shadow: 0 0 10px rgba(50,205,50,0.5); }
+        .temp-quente { background: #DC143C; border-color: #FF6B6B; box-shadow: 0 0 10px rgba(220,20,60,0.5); }
+
+        /* Cards de Banhos */
+        .banho-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .banho-card:hover {
+            transform: translateX(5px);
+        }
+
+        .banho-card.fria { border-left-color: #4169E1; }
+        .banho-card.morna { border-left-color: #32CD32; }
+        .banho-card.quente { border-left-color: #DC143C; }
+
+        .banho-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .banho-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: #F4E4C1;
+            flex: 1;
+        }
+
+        .banho-temp {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .banho-temp.fria { background: rgba(65,105,225,0.2); color: #6495ED; }
+        .banho-temp.morna { background: rgba(50,205,50,0.2); color: #90EE90; }
+        .banho-temp.quente { background: rgba(220,20,60,0.2); color: #FF6B6B; }
+
+        .banho-function {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 15px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .ervas-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .ervas-title {
+            font-size: 0.8rem;
+            color: #D4A574;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ervas-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .erva-item {
+            background: rgba(212, 165, 116, 0.15);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #F4E4C1;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .erva-item::before {
+            content: '🌿';
+            margin-right: 5px;
+            opacity: 0.7;
+        }
+
+        .erva-item:nth-child(7) {
+            grid-column: span 2;
+            background: rgba(212, 165, 116, 0.25);
+            border-color: #D4A574;
+            font-weight: bold;
+        }
+
+        .modo-preparo {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .modo-preparo strong {
+            color: #D4A574;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Calendário Lunar */
+        .calendar-section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .moon-display {
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .moon-icon {
+            font-size: 5rem;
+            animation: float 6s ease-in-out infinite;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .moon-phase-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #F4E4C1;
+            margin-bottom: 10px;
+        }
+
+        .moon-tip {
+            background: rgba(212, 165, 116, 0.1);
+            border-left: 3px solid #D4A574;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .calendar-day.best-day {
+            background: rgba(212, 165, 116, 0.15);
+            border-color: #D4A574;
+        }
+
+        .day-moon {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        /* Orientações Espirituais */
+        .orientacoes-section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .fundamento-card {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(0,0,0,0.2) 100%);
+            border: 1px solid rgba(212, 165, 116, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .fundamento-title {
+            font-family: 'Cinzel', serif;
+            color: #D4A574;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fundamento-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .regras-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .regras-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+        }
+
+        .regras-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #D4A574;
+        }
+
+        .number-7-explanation {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(139, 0, 0, 0.1) 100%);
+            border: 2px solid #D4A574;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .number-7-explanation h3 {
+            font-family: 'Cinzel', serif;
+            color: #D4A574;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .number-7-explanation .big-7 {
+            font-size: 4rem;
+            color: #D4A574;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            display: block;
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(212, 165, 116, 0.5);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 414px;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: space-around;
+            padding: 15px 0;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            z-index: 99;
+        }
+
+        .bottom-nav.visible {
+            display: flex;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s;
+            font-size: 0.7rem;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: #D4A574;
+        }
+
+        .nav-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 414px) {
+            .app-container {
+                max-width: 100%;
+            }
+        }
+
+        /* Scrollbar estilizada */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f0c29;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #D4A574;
+            border-radius: 3px;
+        }
+
+        .hidden-section {
+            display: none;
+        }
+
+        .active-section {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Tela Inicial -->
+        <div class="splash-screen" id="splashScreen">
+            <div class="sacred-symbol">
+                <div class="smoke-particle" style="left: 20%; animation-delay: 0s;"></div>
+                <div class="smoke-particle" style="left: 50%; animation-delay: 1s;"></div>
+                <div class="smoke-particle" style="left: 80%; animation-delay: 2s;"></div>
+            </div>
+            <h1 class="app-title">Axé Banhos</h1>
+            <p class="app-subtitle">Sabedoria das Ervas na Umbanda</p>
+            
+            <div class="number-7-meaning">
+                <strong>O Poder do Número 7</strong><br>
+                Sete ervas sagradas em cada banho.<br>
+                O número da perfeição, de Oxalá e Xangô.<br>
+                A completeza do sagrado.
+            </div>
+            
+            <button class="enter-btn" id="enterBtn">Entrar com Respeito</button>
+        </div>
+
+        <!-- Header -->
+        <div class="header" id="mainHeader">
+            <h1>Axé Banhos <span class="number-7-badge">7</span></h1>
+            <div class="moon-phase" id="currentMoon">🌙 Lua Minguante - Momento de Limpeza</div>
+        </div>
+
+        <!-- Menu Principal -->
+        <div class="main-menu" id="mainMenu">
+            <div style="text-align: center; margin-bottom: 10px; color: #888; font-size: 0.9rem;">
+                Escolha seu Orixá de cabeceira<br>
+                <small style="color: #D4A574;">Cada banho contém 7 ervas sagradas</small>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card oxala" onclick="openOrixa('oxala')">
+                    <span class="orixa-icon">🕊️</span>
+                    <span class="orixa-name orixa-color oxala">Oxalá</span>
+                </div>
+                <div class="menu-card xango" onclick="openOrixa('xango')">
+                    <span class="orixa-icon">⚡</span>
+                    <span class="orixa-name orixa-color xango">Xangô</span>
+                </div>
+                <div class="menu-card nana" onclick="openOrixa('nana')">
+                    <span class="orixa-icon">🌊</span>
+                    <span class="orixa-name orixa-color nana">Nanã</span>
+                </div>
+                <div class="menu-card iemanja" onclick="openOrixa('iemanja')">
+                    <span class="orixa-icon">🐚</span>
+                    <span class="orixa-name orixa-color iemanja">Iemanjá</span>
+                </div>
+                <div class="menu-card oxum" onclick="openOrixa('oxum')">
+                    <span class="orixa-icon">🌻</span>
+                    <span class="orixa-name orixa-color oxum">Oxum</span>
+                </div>
+                <div class="menu-card ogum" onclick="openOrixa('ogum')">
+                    <span class="orixa-icon">⚔️</span>
+                    <span class="orixa-name orixa-color ogum">Ogum</span>
+                </div>
+                <div class="menu-card oxossi" onclick="openOrixa('oxossi')">
+                    <span class="orixa-icon">🏹</span>
+                    <span class="orixa-name orixa-color oxossi">Oxóssi</span>
+                </div>
+                <div class="menu-card iansa" onclick="openOrixa('iansa')">
+                    <span class="orixa-icon">🌪️</span>
+                    <span class="orixa-name orixa-color iansa">Iansã</span>
+                </div>
+                <div class="menu-card exu" onclick="openOrixa('exu')" style="grid-column: span 2;">
+                    <span class="orixa-icon">🗿</span>
+                    <span class="orixa-name orixa-color exu">Exu</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seções de Orixás -->
+        <div id="orixaSections"></div>
+
+        <!-- GUIA DE ERVAS -->
+        <div class="ervas-section" id="ervasSection">
+            <button class="back-btn" onclick="showMainMenu()">
+                <span>←</span> Voltar
+            </button>
+            
+            <div class="ervas-header">
+                <h2 class="ervas-title-main">🌿 Guia de Ervas</h2>
+                <p style="color: #888; font-size: 0.9rem;">Pesquise propriedades medicinais e energéticas</p>
+            </div>
+
+            <!-- LINK EXTERNO DIRETO -->
+            <a href="https://juniorlaranja.github.io/Ervas-na-medicina-e-propriedades-energetica/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="external-link-box">
+                <span class="external-link-icon">🔍</span>
+                <span class="external-link-title">Pesquisa Online Completa</span>
+                <span class="external-link-desc">
+                    Acesse o acervo completo com busca avançada por ervas<br>
+                    <small style="color: #D4A574;">juniorlaranja.github.io</small>
+                </span>
+            </a>
+
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchErvas" placeholder="Pesquisar ervas no app..." onkeyup="searchErvas()">
+            </div>
+            
+            <div class="ervas-list" id="ervasList">
+                <!-- Ervas serão carregadas via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Calendário Lunar -->
+        <div class="calendar-section" id="calendarSection">
+            <button class="back-btn" onclick="showMainMenu()">
+                <span>←</span> Voltar
+            </button>
+            <div class="moon-display">
+                <span class="moon-icon" id="moonIcon">🌕</span>
+                <h2 class="moon-phase-title" id="moonPhaseTitle">Lua Cheia</h2>
+                <p style="color: #888; font-size: 0.9rem;">Momento de plenitude e realização</p>
+            </div>
+            
+            <div class="moon-tip">
+                <strong>💡 Dica Espiritual:</strong>
+                <span id="moonTip">Período ideal para banhos de prosperidade e amor. As energias estão no auge para manifestação.</span>
+            </div>
+
+            <h3 style="font-family: 'Cinzel', serif; color: #D4A574; margin-bottom: 15px;">Melhores Dias para Banhos</h3>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Gerado via JS -->
+            </div>
+
+            <div class="fundamento-card" style="margin-top: 30px;">
+                <div class="fundamento-title">🌙 Fundamento Lunar</div>
+                <p class="fundamento-text">
+                    Na Umbanda, a Lua rege as energias fluidicas. A Lua Nova é para inícios, a Crescente para crescimento, a Cheia para plenitude e a Minguante para descarrego e limpeza.
+                </p>
+            </div>
+        </div>
+
+        <!-- Orientações Espirituais -->
+        <div class="orientacoes-section" id="orientacoesSection">
+            <button class="back-btn" onclick="showMainMenu()">
+                <span>←</span> Voltar
+            </button>
+            
+            <div class="number-7-explanation">
+                <h3>O Mistério do Número 7</h3>
+                <span class="big-7">7</span>
+                <p style="color: #ccc; line-height: 1.8; font-size: 0.95rem;">
+                    Na Umbanda, o número 7 representa a <strong>completeza espiritual</strong>. 
+                    É o número de Oxalá (criação), Xangô (justiça) e de muitas entidades. 
+                    Cada banho com 7 ervas une as vibrações específicas de cada planta em uma 
+                    sinergia perfeita de cura e transformação.
+                </p>
+            </div>
+
+            <div class="fundamento-card">
+                <div class="fundamento-title">🌿 O Axé das 7 Ervas</div>
+                <p class="fundamento-text">
+                    As ervas são elementos sagrados que possuem energia vital (axé) capaz de interagir com nosso campo áurico. Na Umbanda, seu uso é sempre acompanhado de fé, intenção e respeito às entidades. A combinação de 7 ervas cria um campo magnético completo de proteção e cura.
+                </p>
+            </div>
+
+            <div class="fundamento-card">
+                <div class="fundamento-title">🌡️ Temperaturas Energéticas</div>
+                <p class="fundamento-text">
+                    As ervas são classificadas não pela temperatura física, mas pela vibração energética:
+                </p>
+                <ul class="regras-list">
+                    <li><strong>Ervas Frias (🔵):</strong> Energia específica e direcionada. Ativam uma única função preestabelecida.</li>
+                    <li><strong>Ervas Mornas (🟢):</strong> Energia universal positiva. Equilibram, irradiam boas energias e harmonizam.</li>
+                    <li><strong>Ervas Quentes (🔴):</strong> Energia cósmica negativa (no sentido de limpar). Absorvem, purificam e descarregam energias densas.</li>
+                </ul>
+            </div>
+
+            <div class="fundamento-card">
+                <div class="fundamento-title">⚠️ Regras Importantes</div>
+                <ul class="regras-list">
+                    <li>Banhos quentes nunca devem ser jogados sobre o ori (cabeça), apenas do pescoço para baixo</li>
+                    <li>Ervas do Orixá de frente podem ser jogadas na cabeça, acompanhadas de uma erva fria</li>
+                    <li>Faça sempre teste de alergia antes do banho completo</li>
+                    <li>Macere as 7 ervas frescas em água mineral ou de fonte natural</li>
+                    <li>Deixe em infusão por pelo menos 1 hora ao sol ou lua</li>
+                    <li>Tome o banho de ervas após o banho de higiene</li>
+                    <li>Não se enxugue para absorver melhor as vibrações</li>
+                    <li>Consulte sempre seu Guia Espiritual ou Sacerdote</li>
+                </ul>
+            </div>
+
+            <div class="fundamento-card">
+                <div class="fundamento-title">🙏 Preparação Espiritual</div>
+                <p class="fundamento-text">
+                    Antes de colher ervas, peça licença a Ossãe (Orixá das ervas). Durante o banho, mentalize o Orixá correspondente, entoe pontos cantados ou reze com fé e humildade. A energia mental é tão importante quanto as 7 ervas sagradas.
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav" id="bottomNav">
+            <div class="nav-item active" onclick="showMainMenu()">
+                <span class="nav-icon">🏠</span>
+                <span>Início</span>
+            </div>
+            <div class="nav-item" onclick="showErvas()">
+                <span class="nav-icon">🌿</span>
+                <span>Ervas</span>
+            </div>
+            <div class="nav-item" onclick="showCalendar()">
+                <span class="nav-icon">🌙</span>
+                <span>Lua</span>
+            </div>
+            <div class="nav-item" onclick="showOrientacoes()">
+                <span class="nav-icon">📿</span>
+                <span>Axé</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BANCO DE DADOS DE ERVAS
+        const ervasDatabase = [
+            { nome: "Alecrim", temperatura: "fria", funcao: "Purificação e clareza mental", orixas: ["oxala", "xango", "oxossi"] },
+            { nome: "Arruda", temperatura: "fria", funcao: "Proteção contra mau-olhado", orixas: ["xango", "ogum", "exu", "iansa"] },
+            { nome: "Guiné", temperatura: "fria", funcao: "Proteção magnética", orixas: ["xango", "ogum", "exu", "oxossi"] },
+            { nome: "Erva-cidreira", temperatura: "morna", funcao: "Calma e serenidade", orixas: ["oxala", "nana", "oxum"] },
+            { nome: "Camomila", temperatura: "morna", funcao: "Paz e sono tranquilo", orixas: ["iemanja", "oxala", "nana"] },
+            { nome: "Boldo", temperatura: "quente", funcao: "Limpeza pesada do fígado", orixas: ["oxala", "exu", "ogum"] },
+            { nome: "Sal grosso", temperatura: "quente", funcao: "Limpeza radical", orixas: ["exu", "ogum", "iansa", "xango"] },
+            { nome: "Pimenta", temperatura: "quente", funcao: "Quebra demandas", orixas: ["xango", "ogum", "iansa", "exu"] },
+            { nome: "Manjericão", temperatura: "fria", funcao: "Prosperidade e amor", orixas: ["oxum", "oxala", "xango", "oxossi"] },
+            { nome: "Alfazema", temperatura: "morna", funcao: "Paz e proteção suave", orixas: ["iemanja", "oxala", "nana", "oxum"] },
+            { nome: "Rosa branca", temperatura: "morna", funcao: "Amor puro e espiritualidade", orixas: ["oxala", "iemanja", "oxum"] },
+            { nome: "Espada-de-São-Jorge", temperatura: "quente", funcao: "Proteção do lar", orixas: ["ogum", "exu", "xango"] },
+            { nome: "Jasmim", temperatura: "morna", funcao: "Amor e sensualidade", orixas: ["iemanja", "oxum", "oxala"] },
+            { nome: "Arruda", temperatura: "quente", funcao: "Descarrego pesado", orixas: ["exu", "ogum", "iansa"] }
+        ];
+
+        // DADOS COMPLETOS DOS 9 ORIXÁS
+        const orixasData = {
+            oxala: {
+                name: "Oxalá",
+                icon: "🕊️",
+                color: "#F4E4C1",
+                symbology: "Paz, pureza, criação, linhas sagradas",
+                description: "Orixá maior, senhor da criação e da paz. Seus banhos trazem tranquilidade e renovação espiritual. O número 7 é sagrado para Oxalá.",
+                banhos: [
+                    {
+                        nome: "Banho de Limpeza Profunda",
+                        temperatura: "quente",
+                        funcao: "Descarregar energias negativas acumuladas, purificação total do corpo e espírito",
+                        ervas: ["Alecrim", "Manjericão branco", "Boldo (Tapete de Oxalá)", "Erva-cidreira", "Manjerona", "Rosa branca", "Lavanda"],
+                        preparo: "Macere as 7 ervas em água mineral. Deixe ao sol por 2 horas. Coe e aplique do pescoço para baixo. Não passe na cabeça. A 7ª erva (Lavanda) selará o trabalho."
+                    },
+                    {
+                        nome: "Banho de Paz e Equilíbrio",
+                        temperatura: "morna",
+                        funcao: "Harmonizar emoções, trazer serenidade e clareza mental",
+                        ervas: ["Erva-cidreira", "Manjerona", "Rosa branca", "Camomila", "Melissa", "Hortelã", "Capim-limão"],
+                        preparo: "Infusão em água morna. Deixe descansar 30 minutos. Pode ser aplicado no corpo todo, inclusive na cabeça. As 7 ervas criam um campo de paz completo."
+                    },
+                    {
+                        nome: "Banho de Prosperidade",
+                        temperatura: "fria",
+                        funcao: "Abertura de caminhos específicos para prosperidade e paz financeira",
+                        ervas: ["Alecrim", "Arruda", "Guiné", "Erva-de-São-João", "Poejo", "Cidreira", "Alfazema"],
+                        preparo: "Maceração em água fria por 3 horas. Foque a intenção no que deseja. Aplique do pescoço para baixo. As 7 ervas atraem as 7 direções da prosperidade."
+                    }
+                ]
+            },
+            xango: {
+                name: "Xangô",
+                icon: "⚡",
+                color: "#CD5C5C",
+                symbology: "Justiça, força, trovão, lei",
+                description: "Senhor da justiça e do trovão. Seus banhos fortalecem a personalidade e afastam injustiças. O 7 é número de Xangô.",
+                banhos: [
+                    {
+                        nome: "Banho de Justiça e Vitória",
+                        temperatura: "quente",
+                        funcao: "Afastar injustiças, quebrar demandas, vitória em causas difíceis",
+                        ervas: ["Manjericão roxo", "Quebra-pedra", "Fumo de corda", "Aroeira", "Peregun", "Jurema", "Alamanda"],
+                        preparo: "Maceração forte. Água escura e perfumada. Aplique do pescoço para baixo na sexta-feira. As 7 ervas quebram as 7 barreiras da injustiça."
+                    },
+                    {
+                        nome: "Banho de Força e Coragem",
+                        temperatura: "morna",
+                        funcao: "Fortalecer a vontade, autoconfiança e poder pessoal",
+                        ervas: ["Baleeira", "Erva-de-São-João", "Romã folhas", "Dama-da-noite", "Canela de velho", "Pimenta-de-cheiro", "Manjericão roxo"],
+                        preparo: "Infusão em água morna. Banho após o sol. Pode passar na cabeça pedindo força. As 7 ervas ativam os 7 chakras de poder."
+                    },
+                    {
+                        nome: "Banho contra Inveja",
+                        temperatura: "quente",
+                        funcao: "Quebrar olho grande e invejas direcionadas",
+                        ervas: ["Arruda", "Pimenta", "Alfazema", "Sal grosso", "Alho", "Espinheira-santa", "Guiné"],
+                        preparo: "Preparo forte com maceração. Aplique do pescoço para baixo por 3 dias seguidos. As 7 ervas criam escudo inquebrável."
+                    }
+                ]
+            },
+            nana: {
+                name: "Nanã",
+                icon: "🌊",
+                color: "#9370DB",
+                symbology: "Sabedoria, ancestralidade, águas profundas, velhice",
+                description: "Mãe ancestral, dona das águas profundas e da sabedoria. Seus banhos curam e trazem longevidade.",
+                banhos: [
+                    {
+                        nome: "Banho de Cura Profunda",
+                        temperatura: "quente",
+                        funcao: "Cura de enfermidades antigas, limpeza de demandas herdadas",
+                        ervas: ["Alfazema", "Manjerona", "Canela de velho", "Babosa", "Aroeira", "Carqueja", "Malva"],
+                        preparo: "Maceração em água mineral deixada à noite. Aplique do pescoço para baixo em silêncio. As 7 ervas curam as 7 camadas do ser."
+                    },
+                    {
+                        nome: "Banho de Sabedoria Ancestral",
+                        temperatura: "morna",
+                        funcao: "Clareza mental, memória, conexão com ancestrais",
+                        ervas: ["Alecrim", "Sálvia", "Alfavaca roxa", "Cidreira", "Manjericão", "Rosa branca", "Arruda"],
+                        preparo: "Infusão suave. Aplique no corpo todo meditando sobre seus ancestrais. As 7 ervas abrem os 7 portais da memória."
+                    },
+                    {
+                        nome: "Banho de Longevidade",
+                        temperatura: "fria",
+                        funcao: "Saúde e vitalidade específicas para idosos",
+                        ervas: ["Macela", "Malva", "Erva-cidreira", "Camomila", "Melissa", "Hortelã", "Capim-santo"],
+                        preparo: "Maceração em água fria por 4 horas. Banho ao amanhecer. As 7 ervas trazem as 7 bênçãos da longa vida."
+                    }
+                ]
+            },
+            iemanja: {
+                name: "Iemanjá",
+                icon: "🐚",
+                color: "#87CEEB",
+                symbology: "Maternidade, mar, proteção, amor",
+                description: "Mãe de todos os Orixás, dona do mar. Seus banhos trazem proteção maternal e amor.",
+                banhos: [
+                    {
+                        nome: "Banho de Proteção Materna",
+                        temperatura: "morna",
+                        funcao: "Proteção suave, cura emocional, conforto",
+                        ervas: ["Alfazema", "Alecrim", "Jasmim", "Erva-cidreira", "Camomila", "Melissa", "Rosa branca"],
+                        preparo: "Infusão delicada com flores. Pode aplicar no corpo todo. Ideal para crianças. As 7 ervas são os 7 colos de mãe."
+                    },
+                    {
+                        nome: "Banho de Amor e Fertilidade",
+                        temperatura: "fria",
+                        funcao: "Atrair amor verdadeiro, harmonizar relacionamentos",
+                        ervas: ["Rosa branca", "Camélia", "Lágrima de Nossa Senhora", "Jasmim", "Gardenia", "Flor de laranjeira", "Magnólia"],
+                        preparo: "Maceração em água com pétalas. Foque na intenção amorosa. Aplique do peito para baixo. As 7 ervas atraem as 7 formas do amor."
+                    },
+                    {
+                        nome: "Banho de Descarrego no Mar",
+                        temperatura: "quente",
+                        funcao: "Limpeza profunda de energias densas, renovação total",
+                        ervas: ["Sal grosso", "Arruda", "Guiné", "Alfazema", "Alecrim", "Manjericão", "Poejo"],
+                        preparo: "Preparar em casa e levar ao mar, ou usar água salinizada. Aplique do pescoço para baixo e deixe o mar levar. As 7 ervas são os 7 tesouros do mar."
+                    }
+                ]
+            },
+            oxum: {
+                name: "Oxum",
+                icon: "🌻",
+                color: "#FFD700",
+                symbology: "Amor, beleza, prosperidade, doçura",
+                description: "Orixá do amor, beleza e riqueza. Seus banhos abrem caminhos para o coração e para a prosperidade material.",
+                banhos: [
+                    {
+                        nome: "Banho de Amor e Beleza",
+                        temperatura: "fria",
+                        funcao: "Atrair amor, autoestima e beleza interior",
+                        ervas: ["Rosa amarela", "Manjericão", "Alecrim", "Camomila", "Jasmim", "Gardenia", "Flor de laranjeira"],
+                        preparo: "Maceração em água mineral por 3 horas. Aplique do peito para baixo. Visualize a energia dourada de Oxum."
+                    },
+                    {
+                        nome: "Banho de Prosperidade",
+                        temperatura: "morna",
+                        funcao: "Abertura de caminhos, prosperidade financeira",
+                        ervas: ["Manjericão", "Alecrim", "Arruda", "Guiné", "Erva-cidreira", "Alfazema", "Poejo"],
+                        preparo: "Infusão ao sol nascente. Banho de segunda-feira. As 7 ervas atraem as 7 riquezas."
+                    }
+                ]
+            },
+            ogum: {
+                name: "Ogum",
+                icon: "⚔️",
+                color: "#5F9EA0",
+                symbology: "Guerra, proteção, ferro, superação",
+                description: "Orixá da guerra e da superação. Seus banhos fortalecem a proteção e quebram obstáculos.",
+                banhos: [
+                    {
+                        nome: "Banho de Quebra de Obstáculos",
+                        temperatura: "quente",
+                        funcao: "Quebrar demandas, abrir caminhos bloqueados, vitória sobre inimigos",
+                        ervas: ["Quebra-pedra", "Aroeira", "Peregun", "Arruda", "Pimenta", "Alho", "Sal grosso"],
+                        preparo: "Maceração forte. Aplique do pescoço para baixo na quarta-feira. Passe 7 vezes a água pedindo a Ogum."
+                    },
+                    {
+                        nome: "Banho de Proteção Guerreira",
+                        temperatura: "morna",
+                        funcao: "Proteção ativa, força para batalhas diárias",
+                        ervas: ["Aroeira", "Guiné", "Arruda", "Alecrim", "Manjericão", "Erva-de-São-João", "Canela de velho"],
+                        preparo: "Infusão ao meio-dia. Aplique no corpo todo. Visualize a armadura de Ogum te protegendo."
+                    }
+                ]
+            },
+            oxossi: {
+                name: "Oxóssi",
+                icon: "🏹",
+                color: "#90EE90",
+                symbology: "Caça, natureza, sustento, mata",
+                description: "Senhor da mata e da caça. Seus banhos conectam com a natureza e trazem sustento.",
+                banhos: [
+                    {
+                        nome: "Banho de Conexão com a Natureza",
+                        temperatura: "morna",
+                        funcao: "Equilíbrio, saúde, conexão com as energias naturais",
+                        ervas: ["Alecrim", "Eucalipto", "Arruda", "Guiné", "Erva-cidreira", "Manjericão", "Poejo"],
+                        preparo: "Colha as ervas na mata pedindo licença a Ossãe. Maceração em água de riacho se possível."
+                    },
+                    {
+                        nome: "Banho de Sustento",
+                        temperatura: "fria",
+                        funcao: "Atrair oportunidades, abundância material",
+                        ervas: ["Arruda", "Guiné", "Alecrim", "Manjericão", "Erva-cidreira", "Alfazema", "Poejo"],
+                        preparo: "Maceração ao amanhecer. Aplique do pescoço para baixo pedindo a Oxóssi para abrir os caminhos da caça (oportunidades)."
+                    }
+                ]
+            },
+            iansa: {
+                name: "Iansã",
+                icon: "🌪️",
+                color: "#FFA500",
+                symbology: "Vento, mudança, transformação, fogo",
+                description: "Orixá dos ventos e das transformações. Seus banhos trazem mudança e limpeza rápida.",
+                banhos: [
+                    {
+                        nome: "Banho de Mudança Rápida",
+                        temperatura: "quente",
+                        funcao: "Transformação imediata, quebra de padrões negativos, mudança de vida",
+                        ervas: ["Arruda", "Pimenta", "Sal grosso", "Aroeira", "Guiné", "Erva-de-São-João", "Canela de velho"],
+                        preparo: "Preparar na quarta-feira. Aplique do pescoço para baixo pedindo a força do vento de Iansã."
+                    },
+                    {
+                        nome: "Banho de Limpeza com Fogo",
+                        temperatura: "quente",
+                        funcao: "Queimar energias densas, purificação radical",
+                        ervas: ["Pimenta", "Arruda", "Sal grosso", "Aroeira", "Quebra-pedra", "Alho", "Erva-de-São-João"],
+                        preparo: "Maceração forte. Aplique do pescoço para baixo. Visualize o fogo de Iansã consumindo toda negatividade."
+                    }
+                ]
+            },
+            exu: {
+                name: "Exu",
+                icon: "🗿",
+                color: "#D2691E",
+                symbology: "Caminhos, escolhas, comunicação, justiça",
+                description: "Guardião dos caminhos e mensageiro. Seus banhos abrem portas e protegem contra inveja.",
+                banhos: [
+                    {
+                        nome: "Banho de Abertura de Caminhos",
+                        temperatura: "quente",
+                        funcao: "Desbloquear todas as áreas da vida, proteção contra inveja e olho grande",
+                        ervas: ["Arruda", "Pimenta", "Sal grosso", "Guiné", "Aroeira", "Alho", "Erva-de-São-João"],
+                        preparo: "Preparar na segunda-feira à noite. Aplique do pescoço para baixo. Peça licença a Exu antes."
+                    },
+                    {
+                        nome: "Banho de Proteção Cruzada",
+                        temperatura: "quente",
+                        funcao: "Proteção em encruzilhadas, decisões importantes",
+                        ervas: ["Arruda", "Guiné", "Sal grosso", "Pimenta", "Aroeira", "Erva-de-São-João", "Canela de velho"],
+                        preparo: "Maceração forte na segunda-feira. Aplique do pescoço para baixo pedindo a Exu para abrir os caminhos certos."
+                    }
+                ]
+            }
+        };
+
+        // INICIALIZAÇÃO
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM carregado!");
+            
+            const enterBtn = document.getElementById('enterBtn');
+            if (enterBtn) {
+                enterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    enterApp();
+                });
+                
+                enterBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    enterApp();
+                });
+            }
+            
+            startSmokeParticles();
+        });
+
+        function enterApp() {
+            const splash = document.getElementById('splashScreen');
+            const header = document.getElementById('mainHeader');
+            const mainMenu = document.getElementById('mainMenu');
+            const bottomNav = document.getElementById('bottomNav');
+            
+            splash.classList.add('hidden');
+            
+            setTimeout(function() {
+                header.style.display = 'block';
+                header.classList.add('visible');
+                mainMenu.style.display = 'block';
+                mainMenu.classList.add('visible');
+                bottomNav.style.display = 'flex';
+                bottomNav.classList.add('visible');
+                updateMoonPhase();
+            }, 100);
+        }
+
+        function startSmokeParticles() {
+            const symbol = document.querySelector('.sacred-symbol');
+            if (!symbol) return;
+            
+            setInterval(function() {
+                const splash = document.getElementById('splashScreen');
+                if (splash && !splash.classList.contains('hidden')) {
+                    const particle = document.createElement('div');
+                    particle.className = 'smoke-particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    symbol.appendChild(particle);
+                    
+                    setTimeout(function() {
+                        if (particle.parentNode) {
+                            particle.remove();
+                        }
+                    }, 3000);
+                }
+            }, 1000);
+        }
+
+        function showMainMenu() {
+            hideAllSections();
+            document.getElementById('mainMenu').style.display = 'block';
+            updateActiveNav(0);
+        }
+
+        function showErvas() {
+            hideAllSections();
+            document.getElementById('ervasSection').style.display = 'block';
+            updateActiveNav(1);
+            loadErvas();
+        }
+
+        function hideAllSections() {
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('ervasSection').style.display = 'none';
+            document.getElementById('calendarSection').style.display = 'none';
+            document.getElementById('orientacoesSection').style.display = 'none';
+            
+            const orixaSections = document.querySelectorAll('.orixa-section');
+            orixaSections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+        }
+
+        function loadErvas() {
+            const list = document.getElementById('ervasList');
+            if (list.children.length > 0) return;
+            
+            list.innerHTML = ervasDatabase.map(erva => `
+                <div class="erva-card">
+                    <div class="erva-card-header">
+                        <div class="erva-nome">${erva.nome}</div>
+                        <span class="erva-temp-badge ${erva.temperatura}">${erva.temperatura}</span>
+                    </div>
+                    <div class="erva-funcao">${erva.funcao}</div>
+                    <div class="erva-orixas">
+                        ${erva.orixas.map(orixa => `<span class="erva-orixa-tag ${orixa}">${orixa}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function searchErvas() {
+            const search = document.getElementById('searchErvas').value.toLowerCase();
+            const cards = document.querySelectorAll('.erva-card');
+            
+            cards.forEach(card => {
+                const nome = card.querySelector('.erva-nome').textContent.toLowerCase();
+                const funcao = card.querySelector('.erva-funcao').textContent.toLowerCase();
+                
+                if (nome.includes(search) || funcao.includes(search)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openOrixa(orixaKey) {
+            if (!window.orixasData || !orixasData[orixaKey]) {
+                alert('Seção ' + orixaKey + ' em manutenção. Consulte o Guia de Ervas ou tente outro Orixá.');
+                return;
+            }
+            
+            hideAllSections();
+            const orixa = orixasData[orixaKey];
+            
+            let section = document.getElementById(`section-${orixaKey}`);
+            if (!section) {
+                section = document.createElement('div');
+                section.id = `section-${orixaKey}`;
+                section.className = 'orixa-section';
+                
+                let banhosHTML = orixa.banhos.map(banho => `
+                    <div class="banho-card ${banho.temperatura}">
+                        <div class="banho-header">
+                            <h3 class="banho-title">${banho.nome}</h3>
+                            <span class="banho-temp ${banho.temperatura}">
+                                ${banho.temperatura === 'fria' ? '🔵 Fria' : banho.temperatura === 'morna' ? '🟢 Morna' : '🔴 Quente'}
+                            </span>
+                        </div>
+                        <div class="banho-function">"${banho.funcao}"</div>
+                        <div class="ervas-container">
+                            <div class="ervas-title">🌿 As 7 Ervas Sagradas:</div>
+                            <div class="ervas-grid">
+                                ${banho.ervas.map((erva, index) => `
+                                                                     <div class="erva-item" style="${index === 6 ? 'background: rgba(212, 165, 116, 0.3); border-color: #D4A574; font-weight: bold;' : ''}">
+                                        ${index + 1}. ${erva}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="modo-preparo">
+                            <strong>Modo de Preparo:</strong>
+                            ${banho.preparo}
+                        </div>
+                    </div>
+                `).join('');
+
+                section.innerHTML = `
+                    <button class="back-btn" onclick="showMainMenu()">
+                        <span>←</span> Voltar
+                    </button>
+                    <div class="orixa-header ${orixaKey}">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">${orixa.icon}</div>
+                        <h2 class="orixa-title" style="color: ${orixa.color}">${orixa.name}</h2>
+                        <p class="orixa-symbology">${orixa.symbology}</p>
+                    </div>
+                    <p style="color: #aaa; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">
+                        ${orixa.description}
+                    </p>
+                    
+                    <div class="temp-legend">
+                        <div class="temp-item">
+                            <div class="temp-dot temp-fria"></div>
+                            <span>Fria</span>
+                            <small style="font-size: 0.7rem; color: #666;">Específica</small>
+                        </div>
+                        <div class="temp-item">
+                            <div class="temp-dot temp-morna"></div>
+                            <span>Morna</span>
+                            <small style="font-size: 0.7rem; color: #666;">Equilíbrio</small>
+                        </div>
+                        <div class="temp-item">
+                            <div class="temp-dot temp-quente"></div>
+                            <span>Quente</span>
+                            <small style="font-size: 0.7rem; color: #666;">Descarrego</small>
+                        </div>
+                    </div>
+
+                    <h3 style="font-family: 'Cinzel', serif; color: #D4A574; margin: 25px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        Banhos com 7 Ervas <span style="background: #D4A574; color: #1a1a2e; padding: 2px 8px; border-radius: 50%; font-size: 0.9rem;">7</span>
+                    </h3>
+                    ${banhosHTML}
+                `;
+                
+                document.getElementById('orixaSections').appendChild(section);
+            }
+            
+            section.style.display = 'block';
+            updateActiveNav(-1);
+        }
+
+        function showCalendar() {
+            hideAllSections();
+            document.getElementById('calendarSection').style.display = 'block';
+            updateActiveNav(2);
+            generateCalendar();
+        }
+
+        function showOrientacoes() {
+            hideAllSections();
+            document.getElementById('orientacoesSection').style.display = 'block';
+            updateActiveNav(3);
+        }
+
+        function updateActiveNav(index) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function updateMoonPhase() {
+            const phases = [
+                { name: "Lua Nova", icon: "🌑", tip: "Momento de inícios. Ideal para banhos de renovação e novos projetos." },
+                { name: "Lua Crescente", icon: "🌒", tip: "Crescimento e expansão. Banhos de prosperidade e amor." },
+                { name: "Lua Cheia", icon: "🌕", tip: "Plenitude e realização. Energia máxima para qualquer trabalho." },
+                { name: "Lua Minguante", icon: "🌘", tip: "Limpeza e descarrego. Banhos quentes para eliminar o negativo." }
+            ];
+            
+            const day = new Date().getDate();
+            const phaseIndex = Math.floor((day % 28) / 7);
+            const currentPhase = phases[phaseIndex];
+            
+            const moonElement = document.getElementById('currentMoon');
+            if (moonElement) {
+                moonElement.textContent = `${currentPhase.icon} ${currentPhase.name} - ${currentPhase.tip.split('.')[0]}`;
+            }
+        }
+
+        function generateCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            const days = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+            
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.style.cssText = 'text-align: center; font-weight: bold; color: #D4A574; font-size: 0.9rem;';
+                dayHeader.textContent = day;
+                grid.appendChild(dayHeader);
+            });
+            
+            for (let i = 1; i <= 30; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'calendar-day';
+                const isBestDay = [2, 9, 16, 23, 30].includes(i);
+                if (isBestDay) dayDiv.classList.add('best-day');
+                const moonPhase = i % 7 === 0 ? '🌕' : i % 7 === 3 ? '🌑' : '•';
+                
+                dayDiv.innerHTML = `
+                    <span>${i}</span>
+                    <span class="day-moon">${moonPhase}</span>
+                `;
+                grid.appendChild(dayDiv);
+            }
+        }
+    
+window.orixasData = orixasData;
+</script>
+</body>
+</html>
+  
